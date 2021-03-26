@@ -9,13 +9,11 @@
 #include "task.h"
 
 
-
-
  int main(void)
  {	
 	delay_init();
 	MOTOR_Init();
-	xunji_config()	;
+	xunji_config();
 	uart_init(115200);	 //串口初始化为115200
 	TIM3_PWM_Init(999,7200);//1000
   while(1)

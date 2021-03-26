@@ -47,7 +47,7 @@ void Read_xunji_Date(void)
 }
 
 
-int xuanze(void)//             黑色返回1，白色返回0
+int xuanze_qian(void)//             黑色返回1，白色返回0
 {
 	Read_xunji_Date();
 	if(xunji_1==1&&xunji_2==1&&xunji_3==1&&xunji_4==0&&xunji_5==0&&xunji_6==1&&xunji_7==1&&xunji_8==1)
@@ -119,13 +119,62 @@ int xuanze(void)//             黑色返回1，白色返回0
 }
 
 
-void go(int initial_speed)
+int  xuanze_hou(void)
+{
+  Read_xunji_Date();
+  
+	if(xunji_a==1&&xunji_b==0&&xunji_c==0&&xunji_d==1)
+	{
+		error=0;//1001
+	}
+     else if(xunji_a==1&&xunji_b==0&&xunji_c==0&&xunji_d==1)
+	{
+		error=-250;//1100     两个灯检测到（左偏）
+	}
+    else if(xunji_a==1&&xunji_b==0&&xunji_c==0&&xunji_d==1)
+	{
+		error=250;//0011     两个灯检测到（右偏）
+	}
+    else if(xunji_a==1&&xunji_b==0&&xunji_c==0&&xunji_d==1)
+	{
+		error=-200;//1101    一个灯检测到（左偏）
+	}
+    else if(xunji_a==1&&xunji_b==0&&xunji_c==0&&xunji_d==1)
+	{
+		error=-300;//1110    一个灯检测到（左偏）
+	}
+     else if(xunji_a==1&&xunji_b==0&&xunji_c==0&&xunji_d==1)
+	{
+		error=200;//1011   一个灯检测到（右偏）
+	}
+     else if(xunji_a==1&&xunji_b==0&&xunji_c==0&&xunji_d==1)
+	{
+		error=300;//0111    一个灯检测到（右偏）
+	}
+  
+}
+
+
+void go_forward(int initial_speed)
 {		
 	int error=0;
 	int left_pwm,right_pwm;
-	error=xuanze();
+	error=xuanze_qian();
 	left_pwm= initial_speed - error;
   right_pwm= initial_speed + error;
+	//printf("\r\n您发送的消息为:\r\n\r\n");
+	//printf("\r\n  %d   %d\r\n\r\n",left_pwm,right_pwm);
+	TIM_SetTIM3Compare1(left_pwm,right_pwm);
+}
+
+void go_back(int initial_speed)
+{		
+	int error=0;
+	int left_pwm,right_pwm;
+	error=xuanze_hou();
+  initial_speed = -initial_speed;  //后退的入口参数是正的，这里转为负的
+	left_pwm= initial_speed + error;
+  right_pwm= initial_speed - error;
 	//printf("\r\n您发送的消息为:\r\n\r\n");
 	//printf("\r\n  %d   %d\r\n\r\n",left_pwm,right_pwm);
 	TIM_SetTIM3Compare1(left_pwm,right_pwm);

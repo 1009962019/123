@@ -13,6 +13,10 @@
 #define xunji_6 GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_5)
 #define xunji_7 GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_6)
 #define xunji_8 GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_7)//右
+
+#define xunji_L GPIO_ReadInputDataBit(GPIOG,GPIO_Pin_0)//车头在前的左
+#define xunji_R GPIO_ReadInputDataBit(GPIOG,GPIO_Pin_1)
+
 //车尾灰度
 #define xunji_a GPIO_ReadInputDataBit(GPIOF,GPIO_Pin_1)//左边
 #define xunji_b GPIO_ReadInputDataBit(GPIOF,GPIO_Pin_2)
@@ -22,8 +26,10 @@
 
 void xunji_config(void);
 void Read_xunji_Date(void);  //读循迹模块返回的值
-int  xuanze(void);
-void go(int initial_speed);
+int  xuanze_qian(void);
+int  xuanze_hou(void);
+void go_forward(int initial_speed);
+void go_back(int initial_speed);
 void  turn_right(void);
 void  turn_left(void);
 void  stop(void);

@@ -5,13 +5,14 @@
 #include "usart.h"
 
 
-#define huidu_left GPIO_ReadInputDataBit(GPIOG,GPIO_Pin_0)
-#define huidu_right GPIO_ReadInputDataBit(GPIOG,GPIO_Pin_1)
+//#define xunji_L GPIO_ReadInputDataBit(GPIOG,GPIO_Pin_0)
+//#define xunji_R GPIO_ReadInputDataBit(GPIOG,GPIO_Pin_1)
 
 
 
 
 void  qianjin(int a);
+void  houtui(int a);
 
 
 #endif
